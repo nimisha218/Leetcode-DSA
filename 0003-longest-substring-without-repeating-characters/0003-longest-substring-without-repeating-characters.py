@@ -1,43 +1,79 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        
-        # Check for base case
-        if len(s) == 0:
-            return 0
-        
-        if len(s) == 1:
-            return 1
-
-        f_map = {}
-        f_map[s[0]] = 1
 
         left = 0
-        right = 1
 
-        cur_freq, max_freq = 1, 1
+        res = 0
 
-        while (right < len(s)):
+        d = set()
 
-            if s[right] not in f_map:
-                cur_freq += 1
-                if cur_freq > max_freq:
-                    max_freq = cur_freq
-                f_map[s[right]] = 1
-                right += 1
+        for right in range(len(s)):
+            while s[right] in d:
+                d.remove(s[left])
+                left += 1
+            d.add(s[right])
+            res = max(res, right - left + 1)
+
+        return res
             
-            else:
-                f_map[s[right]] += 1
-                cur_freq += 1
-                while (f_map[s[right]] > 1):
-                    f_map[s[left]] -= 1
-                    cur_freq -= 1
-                    left += 1
-                if cur_freq > max_freq:
-                    max_freq = cur_freq
-                right += 1
+
+                
 
 
-        return max_freq
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        # # Check for base case
+        # if len(s) == 0:
+        #     return 0
+        
+        # if len(s) == 1:
+        #     return 1
+
+        # f_map = {}
+        # f_map[s[0]] = 1
+
+        # left = 0
+        # right = 1
+
+        # cur_freq, max_freq = 1, 1
+
+        # while (right < len(s)):
+
+        #     if s[right] not in f_map:
+        #         cur_freq += 1
+        #         if cur_freq > max_freq:
+        #             max_freq = cur_freq
+        #         f_map[s[right]] = 1
+        #         right += 1
+            
+        #     else:
+        #         f_map[s[right]] += 1
+        #         cur_freq += 1
+        #         while (f_map[s[right]] > 1):
+        #             f_map[s[left]] -= 1
+        #             cur_freq -= 1
+        #             left += 1
+        #         if cur_freq > max_freq:
+        #             max_freq = cur_freq
+        #         right += 1
+
+
+        # return max_freq
          
 
 
